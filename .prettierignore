@@ -1,0 +1,13 @@
+# Ignore all files:
+*.*
+
+# Negate the above pattern for CSS files in the `tailwind` folder and for
+# all JavaScript and JSON files:
+!tailwind/**/*.css
+!*.js
+!*.json
+
+# Ignore minified JavaScript:
+*.min.js
+
+/vendor
