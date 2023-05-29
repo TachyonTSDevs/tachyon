@@ -21,6 +21,10 @@
 
 <body <?php body_class(); ?>>
 
+<div class="invisible h-0">
+	<?php get_template_part( 'template-parts/layout/icon-sprites' ); ?>
+</div>
+
 <?php wp_body_open(); ?>
 
 <div id="page">

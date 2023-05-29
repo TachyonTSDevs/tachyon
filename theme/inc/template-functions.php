@@ -204,3 +204,18 @@ function tachyon_html5_comment( $comment, $args, $depth ) {
 		</article><!-- .comment-body -->
 	<?php
 }
+
+/**
+ * Gets the SVG code for a given icon.
+ *
+ * @since Twenty Twenty-One 1.0
+ *
+ * @param string $icon  The icon.
+ * @return string
+ */
+function tachyon_get_icon_svg( $icon ) {
+	$svg = sprintf( '<svg class="%s" width="1em" height="1em" fill="currentColor">', $icon )
+				. sprintf( '<use xlink:href="#%s"></use>', $icon )
+			. '</svg>';
+	return $svg;
+}
