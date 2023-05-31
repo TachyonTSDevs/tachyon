@@ -19,7 +19,7 @@
  */
 .page-title,
 .entry-title {
-	@apply max-w-content mx-auto mb-6 text-3xl font-extrabold text-neutral-900;
+	@apply max-w-content mx-auto mb-6 text-3xl font-extrabold text-slate-900 dark:text-white;
 }
 
 /**
@@ -53,4 +53,117 @@
 
 .entry-content > .alignright {
 	@apply float-right ml-8;
+}
+
+/**
+ * Header
+ */
+#masthead {
+	.menu-item > a,
+	button {
+		@apply block rounded px-3 py-2 font-semibold transition-colors duration-300;
+	}
+
+	.menu-item:is(:hover, .sub-menu-expanded) > :is(a, button),
+	button:is(:hover, .active) {
+		@apply text-primary bg-slate-100 dark:bg-slate-600 dark:text-blue-200;
+	}
+
+	.menu-item-has-children {
+		@apply relative grid grid-cols-[1fr_auto];
+
+		> a:first-child {
+			@apply rounded-r-none pr-1;
+		}
+
+		> button.sub-menu-toggle:not(.not-split) {
+			@apply rounded-l-none lg:pl-1;
+
+			svg {
+				@apply transition-transform duration-300;
+			}
+		}
+
+		&.sub-menu-expanded
+			> button.sub-menu-toggle[aria-expanded="true"]
+			svg.fa-chevron-down {
+			transform: rotate(180deg);
+		}
+
+		> .sub-menu {
+			@apply lt-lg:pl-5 col-span-full hidden overflow-y-hidden py-2 lg:absolute lg:top-full lg:rounded-lg lg:border lg:bg-white lg:dark:bg-slate-700;
+
+			.sub-menu {
+				position: unset;
+			}
+
+			> .menu-item {
+				@apply block whitespace-nowrap;
+			}
+
+			&.apply-animation {
+				@apply lt-lg:h-0 lt-lg:my-0 lt-lg:py-0;
+			}
+		}
+
+		&.sub-menu-expanded > .sub-menu {
+			@apply block;
+		}
+	}
+
+	#site-navigation .menu-item-has-children:hover > .sub-menu {
+		@apply block;
+	}
+}
+
+/**
+ * Offcanvas
+ */
+@media screen(lt-lg) {
+	.offcanvas {
+		@apply fixed top-0 z-40 flex h-full w-full max-w-xs transform flex-col border-r bg-white !outline-0 transition-transform duration-300 dark:border-slate-700 dark:bg-slate-800;
+
+		&.offcanvas-left {
+			@apply left-0 -translate-x-full;
+		}
+
+		&.offcanvas-right {
+			@apply right-0 translate-x-full;
+		}
+
+		&.showing,
+		&.show:not(.hiding) {
+			@apply translate-x-0;
+		}
+
+		&:not(.showing):not(.hiding):not(.show) {
+			@apply hidden;
+		}
+	}
+}
+
+/**
+ * Modal
+ */
+.modal {
+	@apply fixed left-0 top-0 z-[60] hidden h-full w-full overflow-y-auto overflow-x-hidden outline-0;
+
+	&.fade .modal-dialog {
+		@apply -translate-y-12 transition-transform duration-300;
+	}
+
+	&.show .modal-dialog {
+		@apply translate-y-0;
+	}
+}
+
+/**
+ * Fade animations
+ */
+.fade {
+	@apply transition-opacity duration-300;
+
+	&:not(.show) {
+		opacity: 0;
+	}
 }

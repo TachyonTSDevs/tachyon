@@ -19,7 +19,7 @@
 	<?php wp_head(); ?>
 </head>
 
-<body <?php body_class(); ?>>
+<body <?php body_class( 'bg-white text-slate-900 antialiased dark:bg-slate-900 dark:text-white' ); ?>>
 
 <div class="invisible h-0">
 	<?php get_template_part( 'template-parts/layout/icon-sprites' ); ?>
@@ -28,8 +28,10 @@
 <?php wp_body_open(); ?>
 
 <div id="page">
-	<a href="#content" class="sr-only focus:not-sr-only"><?php esc_html_e( 'Skip to content', 'tachyon' ); ?></a>
+	<a href="#content" class="sr-only block bg-emerald-100 !p-4 text-center outline-0 focus:not-sr-only dark:bg-emerald-800">
+		<span class="p-2 underline outline-dashed outline-1"><?php esc_html_e( 'Skip to content', 'tachyon' ); ?></span>
+	</a>
 
-	<?php get_template_part( 'template-parts/layout/header', 'content' ); ?>
+	<?php get_template_part( 'template-parts/layout/header/header', 'content' ); ?>
 
 	<div id="content">

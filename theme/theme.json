@@ -16,7 +16,7 @@
 				},
 				{
 					"slug": "primary",
-					"color": "#b91c1c",
+					"color": "#1773e0",
 					"name": "Primary"
 				},
 				{
@@ -32,8 +32,8 @@
 			]
 		},
 		"layout": {
-			"contentSize": "40rem",
-			"wideSize": "60rem"
+			"contentSize": "960px",
+			"wideSize": "1280px"
 		}
 	}
 }

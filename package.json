@@ -21,12 +21,13 @@
 		"postcss-import-ext-glob": "^2.1.1",
 		"prettier": "^2.8.7",
 		"prettier-plugin-tailwindcss": "^0.2.7",
-		"tailwindcss": "^3.3.1"
+		"tailwindcss": "^3.3.1",
+		"typescript": "^5.0.4"
 	},
 	"scripts": {
 		"development:tailwind:frontend": "npx tailwindcss --postcss -i ./tailwind/tailwind.css -c ./tailwind/tailwind.config.js -o ./theme/style.css",
 		"development:tailwind:editor": "cross-env _TW_TARGET=editor npx tailwindcss --postcss -i ./tailwind/tailwind.css -c ./tailwind/tailwind.config.js -o ./theme/style-editor.css",
-		"development:esbuild": "npx esbuild ./javascript/script.js ./javascript/block-editor.js --target=esnext --bundle --outdir=./theme/js --out-extension:.js=.min.js",
+		"development:esbuild": "npx esbuild ./javascript/script.ts ./javascript/block-editor.js --target=esnext --bundle --outdir=./theme/js --out-extension:.js=.min.js",
 		"development": "run-p development:**",
 		"dev": "npm run development",
 		"watch:tailwind:frontend": "npm run development:tailwind:frontend -- --watch",
@@ -34,6 +35,7 @@
 		"watch:esbuild": "npm run development:esbuild -- --watch",
 		"watch": "run-p watch:**",
 		"lint:eslint": "npx eslint theme/",
+		"lint:typescript": "npx tsc -p javascript/",
 		"lint:prettier": "npx prettier --check .",
 		"lint": "run-p lint:*",
 		"lint-fix:eslint": "npx eslint theme/ --fix",

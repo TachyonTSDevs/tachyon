@@ -38,7 +38,7 @@ if ( ! defined( 'TACHYON_TYPOGRAPHY_CLASSES' ) ) {
 	 */
 	define(
 		'TACHYON_TYPOGRAPHY_CLASSES',
-		'prose prose-neutral max-w-none prose-a:text-primary'
+		'prose prose-slate max-w-none prose-a:text-primary dark:prose-invert'
 	);
 }
 
