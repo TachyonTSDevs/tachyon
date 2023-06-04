@@ -146,7 +146,7 @@
  * Modal
  */
 .modal {
-	@apply fixed left-0 top-0 z-[60] hidden h-full w-full overflow-y-auto overflow-x-hidden outline-0;
+	@apply fixed left-0 top-[var(--wp-admin--admin-bar--height,_0px)] z-[60] hidden h-full w-full overflow-y-auto overflow-x-hidden outline-0;
 
 	&.fade .modal-dialog {
 		@apply -translate-y-12 transition-transform duration-300;
@@ -166,4 +166,18 @@
 	&:not(.show) {
 		opacity: 0;
 	}
+}
+
+/**
+ * Footer
+ */
+#social-links a {
+	@apply text-slate-500 hover:text-slate-600 dark:text-slate-300 dark:hover:text-slate-400;
+}
+
+/**
+ * Rainmaker Form
+ */
+.rm_button {
+	@apply w-full text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-md text-sm px-5 py-2.5 text-center;
 }

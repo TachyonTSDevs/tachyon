@@ -82,6 +82,7 @@ if ( ! function_exists( 'tachyon_setup' ) ) :
 			array(
 				'menu-1' => __( 'Primary', 'tachyon' ),
 				'menu-2' => __( 'Footer Menu', 'tachyon' ),
+				'menu-3' => __( 'Social Links', 'tachyon' ),
 			)
 		);
 

@@ -33,3 +33,45 @@ function tachyon_add_sub_menu_toggle( $output, $item, $depth, $args ) {
 	return $output;
 }
 add_filter( 'walker_nav_menu_start_el', 'tachyon_add_sub_menu_toggle', 10, 4 );
+
+/**
+ * Detects the social network from a URL and returns the SVG code for its icon.
+ *
+ * @param string $url  Social link.
+ * @return string
+ */
+function tachyon_get_social_link_svg( $url ) {
+	if ( substr( $url, 0, 7 ) === 'mailto:' ) {
+		return tachyon_get_icon_svg( 'fa-envelope' );
+	}
+
+	$domains = explode( '.', wp_parse_url( $url, PHP_URL_HOST ) );
+	$icon    = end( $domains );
+	if ( count( $domains ) > 1 ) {
+		$icon = prev( $domains );
+	}
+	return tachyon_get_icon_svg( 'fa-' . $icon );
+}
+
+/**
+ * Displays SVG icons in the footer navigation.
+ *
+ * @param string   $item_output The menu item's starting HTML output.
+ * @param WP_Post  $item        Menu item data object.
+ * @param int      $depth       Depth of the menu. Used for padding.
+ * @param stdClass $args        An object of wp_nav_menu() arguments.
+ * @return string The menu item output with social icon.
+ */
+function tachyon_nav_menu_social_icons( $item_output, $item, $depth, $args ) {
+	// Change SVG icon inside social links menu if there is supported URL.
+	if ( 'menu-3' === $args->theme_location ) {
+		$svg = tachyon_get_social_link_svg( $item->url );
+		if ( ! empty( $svg ) ) {
+			$item_output = str_replace( $args->link_before, $svg . '<span class="sr-only">', $item_output );
+		}
+	}
+
+	return $item_output;
+}
+
+add_filter( 'walker_nav_menu_start_el', 'tachyon_nav_menu_social_icons', 10, 4 );
