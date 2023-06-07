@@ -16,7 +16,7 @@
 
 		<div id="nav-menu" class="offcanvas offcanvas-right top-[var(--wp-admin--admin-bar--height,_0px)] flex-grow" aria-labelledby="nav-menu-label" tabindex="-1">
 			<div class="flex items-center justify-between border-b p-4 text-xl dark:border-slate-700 lg:hidden">
-				<span class="font-bold" id="nav-menu-label">Menu</span>
+				<span class="font-bold" id="nav-menu-label"><?php esc_html_e( 'Menu', 'tachyon' ); ?></span>
 				<button data-dismiss="offcanvas" aria-label="Close">
 					<?php echo tachyon_get_icon_svg( 'bi-x-lg' ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
 				</button>

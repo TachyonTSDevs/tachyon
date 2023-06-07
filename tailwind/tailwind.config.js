@@ -13,7 +13,6 @@ module.exports = {
 		'./theme/theme.json',
 		'./javascript/**/*.{js,ts}',
 	],
-	safelist: ['px-2'],
 	theme: {
 		container: {
 			padding: {

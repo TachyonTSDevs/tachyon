@@ -176,8 +176,14 @@
 }
 
 /**
- * Rainmaker Form
+ * Icegram Express Form
  */
-.rm_button {
-	@apply w-full text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-md text-sm px-5 py-2.5 text-center;
+.es-form-field-container {
+	.es-field-label {
+		@apply block mb-1.5 text-sm font-medium;
+	}
+
+	input[type="submit"] {
+		@apply w-full text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-md text-sm px-5 py-2.5 text-center;
+	}
 }
