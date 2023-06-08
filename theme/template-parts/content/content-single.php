@@ -50,7 +50,7 @@
 	</div><!-- .entry-content -->
 
 	<footer class="entry-footer">
-		<?php tachyon_entry_footer(); ?>
+		<?php tachyon_entry_meta(); ?>
 	</footer><!-- .entry-footer -->
 
 </article><!-- #post-${ID} -->

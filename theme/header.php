@@ -34,4 +34,4 @@
 
 	<?php get_template_part( 'template-parts/layout/header/header', 'content' ); ?>
 
-	<div id="content">
+	<div id="content" class="container mx-auto py-5">

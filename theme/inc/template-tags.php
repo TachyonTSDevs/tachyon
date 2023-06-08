@@ -12,9 +12,9 @@ if ( ! function_exists( 'tachyon_posted_on' ) ) :
 	 * Prints HTML with meta information for the current post-date/time.
 	 */
 	function tachyon_posted_on() {
-		$time_string = '<time datetime="%1$s">%2$s</time>';
+		$time_string = '<time datetime="%1$s" class="published">%2$s</time>';
 		if ( get_the_time( 'U' ) !== get_the_modified_time( 'U' ) ) {
-			$time_string = '<time datetime="%1$s">%2$s</time><time datetime="%3$s">%4$s</time>';
+			$time_string .= ' - <time datetime="%3$s" class="updated">%4$s</time>';
 		}
 
 		$time_string = sprintf(
@@ -25,11 +25,7 @@ if ( ! function_exists( 'tachyon_posted_on' ) ) :
 			esc_html( get_the_modified_date() )
 		);
 
-		printf(
-			'<a href="%1$s" rel="bookmark">%2$s</a>',
-			esc_url( get_permalink() ),
-			$time_string // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-		);
+		echo '<div>' . $time_string . '</div>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	}
 endif;
 
@@ -40,7 +36,7 @@ if ( ! function_exists( 'tachyon_posted_by' ) ) :
 	function tachyon_posted_by() {
 		printf(
 		/* translators: 1: posted by label, only visible to screen readers. 2: author link. 3: post author. */
-			'<span class="sr-only">%1$s</span><span class="author vcard"><a class="url fn n" href="%2$s">%3$s</a></span>',
+			'<div><span class="sr-only">%1$s</span><span class="author vcard"><a class="url fn n" href="%2$s">%3$s</a></span></div>',
 			esc_html__( 'Posted by', 'tachyon' ),
 			esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ),
 			esc_html( get_the_author() )
@@ -70,18 +66,12 @@ if ( ! function_exists( 'tachyon_entry_meta' ) ) :
 		// Hide author, post date, category and tag text for pages.
 		if ( 'post' === get_post_type() ) {
 
-			// Posted by.
-			tachyon_posted_by();
-
-			// Posted on.
-			tachyon_posted_on();
-
 			/* translators: used between list items, there is a space after the comma. */
 			$categories_list = get_the_category_list( __( ', ', 'tachyon' ) );
 			if ( $categories_list ) {
 				printf(
 				/* translators: 1: posted in label, only visible to screen readers. 2: list of categories. */
-					'<span class="sr-only">%1$s</span>%2$s',
+					'<div class="font-extrabold"><span class="sr-only">%1$s</span>%2$s</div>',
 					esc_html__( 'Posted in', 'tachyon' ),
 					$categories_list // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 				);
@@ -92,78 +82,20 @@ if ( ! function_exists( 'tachyon_entry_meta' ) ) :
 			if ( $tags_list ) {
 				printf(
 				/* translators: 1: tags label, only visible to screen readers. 2: list of tags. */
-					'<span class="sr-only">%1$s</span>%2$s',
+					'<div class="font-extrabold"><span class="sr-only">%1$s</span>%2$s</div>',
 					esc_html__( 'Tags:', 'tachyon' ),
 					$tags_list // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 				);
 			}
-		}
-
-		// Comment count.
-		if ( ! is_singular() ) {
-			tachyon_comment_count();
-		}
-
-		// Edit post link.
-		edit_post_link(
-			sprintf(
-				wp_kses(
-				/* translators: %s: Name of current post. Only visible to screen readers. */
-					__( 'Edit <span class="sr-only">%s</span>', 'tachyon' ),
-					array(
-						'span' => array(
-							'class' => array(),
-						),
-					)
-				),
-				get_the_title()
-			)
-		);
-	}
-endif;
-
-if ( ! function_exists( 'tachyon_entry_footer' ) ) :
-	/**
-	 * Prints HTML with meta information for the categories, tags and comments.
-	 */
-	function tachyon_entry_footer() {
-
-		// Hide author, post date, category and tag text for pages.
-		if ( 'post' === get_post_type() ) {
 
 			// Posted by.
 			tachyon_posted_by();
 
 			// Posted on.
 			tachyon_posted_on();
-
-			/* translators: used between list items, there is a space after the comma. */
-			$categories_list = get_the_category_list( __( ', ', 'tachyon' ) );
-			if ( $categories_list ) {
-				printf(
-				/* translators: 1: posted in label, only visible to screen readers. 2: list of categories. */
-					'<span class="sr-only">%1$s</span>%2$s',
-					esc_html__( 'Posted in', 'tachyon' ),
-					$categories_list // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-				);
-			}
-
-			/* translators: used between list items, there is a space after the comma. */
-			$tags_list = get_the_tag_list( '', __( ', ', 'tachyon' ) );
-			if ( $tags_list ) {
-				printf(
-				/* translators: 1: tags label, only visible to screen readers. 2: list of tags. */
-					'<span class="sr-only">%1$s</span>%2$s',
-					esc_html__( 'Tags:', 'tachyon' ),
-					$tags_list // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-				);
-			}
 		}
 
 		// Comment count.
-		if ( ! is_singular() ) {
-			tachyon_comment_count();
-		}
 
 		// Edit post link.
 		edit_post_link(
@@ -204,9 +136,9 @@ if ( ! function_exists( 'tachyon_post_thumbnail' ) ) :
 		else :
 			?>
 
-			<figure>
+			<figure class="flex flex-shrink-0 items-center justify-center list-thumbnail" style="background-image: url(<?php the_post_thumbnail_url( 'tachyon-list-thumbnail' ); ?>);">
 				<a href="<?php the_permalink(); ?>" aria-hidden="true" tabindex="-1">
-					<?php the_post_thumbnail(); ?>
+					<?php the_post_thumbnail( 'tachyon-list-thumbnail' ); ?>
 				</a>
 			</figure>
 
@@ -260,6 +192,7 @@ if ( ! function_exists( 'tachyon_the_posts_navigation' ) ) :
 	function tachyon_the_posts_navigation() {
 		the_posts_pagination(
 			array(
+				'class'     => 'mt-5',
 				'mid_size'  => 2,
 				'prev_text' => __( 'Newer posts', 'tachyon' ),
 				'next_text' => __( 'Older posts', 'tachyon' ),

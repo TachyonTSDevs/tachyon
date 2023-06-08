@@ -19,7 +19,7 @@
  */
 .page-title,
 .entry-title {
-	@apply max-w-content mx-auto mb-6 text-3xl font-extrabold text-slate-900 dark:text-white;
+	@apply mb-6 text-3xl font-extrabold text-slate-900 dark:text-white;
 }
 
 /**
@@ -59,6 +59,12 @@
  * Header
  */
 #masthead {
+	@media screen and (max-width: 600px) {
+		& {
+			--wp-admin--admin-bar--height: 0px;
+		}
+	}
+
 	.menu-item > a,
 	button {
 		@apply block rounded px-3 py-2 font-semibold transition-colors duration-300;
@@ -180,10 +186,35 @@
  */
 .es-form-field-container {
 	.es-field-label {
-		@apply block mb-1.5 text-sm font-medium;
+		@apply mb-1.5 block text-sm font-medium;
 	}
 
 	input[type="submit"] {
-		@apply w-full text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-md text-sm px-5 py-2.5 text-center;
+		@apply w-full rounded-md bg-gradient-to-br from-green-400 to-blue-600 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-gradient-to-bl focus:outline-none focus:ring-4 focus:ring-green-200 dark:focus:ring-green-800;
 	}
+}
+
+/**
+ * Post List Thumbnail
+ */
+.list-thumbnail {
+	background-size: 100% 100%;
+	position: relative;
+
+	&::after {
+		backdrop-filter: blur(20px);
+		content: "";
+		@apply absolute top-0 z-0 block h-full w-full;
+	}
+
+	> * {
+		z-index: 1;
+	}
+}
+
+/**
+ * Pagination
+ */
+.nav-links {
+	@apply after:clear-both;
 }

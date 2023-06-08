@@ -29,14 +29,7 @@ get_header();
 				<?php
 			endif;
 
-			// Load posts loop.
-			while ( have_posts() ) {
-				the_post();
-				get_template_part( 'template-parts/content/content' );
-			}
-
-			// Previous/next page navigation.
-			tachyon_the_posts_navigation();
+			get_template_part( 'template-parts/content/content', 'list' );
 
 		} else {
 

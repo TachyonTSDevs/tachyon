@@ -117,6 +117,9 @@ if ( ! function_exists( 'tachyon_setup' ) ) :
 
 		// Remove support for block templates.
 		remove_theme_support( 'block-templates' );
+
+		// Add Image Sizes.
+		tachyon_add_image_sizes();
 	}
 endif;
 add_action( 'after_setup_theme', 'tachyon_setup' );
@@ -140,6 +143,15 @@ function tachyon_widgets_init() {
 	);
 }
 add_action( 'widgets_init', 'tachyon_widgets_init' );
+
+if ( ! function_exists( 'tachyon_add_image_sizes' ) ) {
+	/**
+	 * Custom Image Sizes
+	 */
+	function tachyon_add_image_sizes() {
+		add_image_size( 'tachyon-list-thumbnail', 300, 300, true );
+	}
+}
 
 /**
  * Enqueue scripts and styles.

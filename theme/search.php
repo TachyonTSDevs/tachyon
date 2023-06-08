@@ -27,16 +27,7 @@ get_header();
 			</header><!-- .page-header -->
 
 			<?php
-			// Start the Loop.
-			while ( have_posts() ) :
-				the_post();
-				get_template_part( 'template-parts/content/content', 'excerpt' );
-
-				// End the loop.
-			endwhile;
-
-			// Previous/next page navigation.
-			tachyon_the_posts_navigation();
+			get_template_part( 'template-parts/content/content', 'list' );
 
 		else :
 
