@@ -10,7 +10,7 @@
 ?>
 
 <div id="search-modal" class="modal fade" tabindex="-1">
-	<div class="modal-dialog pointer-events-none relative mx-auto flex min-h-screen w-auto max-w-4xl flex-col lg:justify-center">
+	<div class="modal-dialog pointer-events-none relative mx-auto flex min-h-screen w-auto max-w-content flex-col lg:justify-center">
 		<div class="pointer-events-auto flex items-center gap-3 rounded-lg border bg-white p-5 dark:border-slate-700 dark:bg-slate-800">
 			<button data-dismiss="modal" aria-label="Back">
 				<?php echo tachyon_get_icon_svg( 'fa-arrow-left' ); // phpcs:ignore WordPress.Security.EscapeOutput ?>

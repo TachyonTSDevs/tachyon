@@ -14,7 +14,7 @@ get_header();
 		<main id="main">
 
 			<div>
-				<header class="page-header">
+				<header class="page-header mx-auto max-w-content">
 					<h1 class="page-title"><?php esc_html_e( 'Page Not Found', 'tachyon' ); ?></h1>
 				</header><!-- .page-header -->
 

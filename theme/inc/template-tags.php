@@ -12,15 +12,28 @@ if ( ! function_exists( 'tachyon_posted_on' ) ) :
 	 * Prints HTML with meta information for the current post-date/time.
 	 */
 	function tachyon_posted_on() {
-		$time_string = '<time datetime="%1$s" class="published">%2$s</time>';
+		if ( is_single() ) {
+			$start = '<div><span class="font-semibold">' . tachyon_get_icon_svg( 'fa-calendar-days', true ) . ' '; // phpcs:ignore WordPress.Security.EscapeOutput
+			$end   = '</div>';
+		} else {
+			$start = '<span class="sr-only">';
+			$end   = '';
+		}
+
+		$time_string = $start . '%1$s:</span> <time datetime="%2$s" class="published">%3$s</time>' . $end;
 		if ( get_the_time( 'U' ) !== get_the_modified_time( 'U' ) ) {
-			$time_string .= ' - <time datetime="%3$s" class="updated">%4$s</time>';
+			if ( ! is_single() ) {
+				$start = ' - ' . $start;
+			}
+			$time_string .= $start . '%4$s:</span> <time datetime="%5$s" class="updated">%6$s</time>' . $end;
 		}
 
 		$time_string = sprintf(
 			$time_string,
+			esc_html__( 'Published on', 'tachyon' ),
 			esc_attr( get_the_date( DATE_W3C ) ),
 			esc_html( get_the_date() ),
+			esc_html__( 'Last updated on', 'tachyon' ),
 			esc_attr( get_the_modified_date( DATE_W3C ) ),
 			esc_html( get_the_modified_date() )
 		);
@@ -34,7 +47,16 @@ if ( ! function_exists( 'tachyon_posted_by' ) ) :
 	 * Prints HTML with meta information about theme author.
 	 */
 	function tachyon_posted_by() {
+		is_singular() ?
 		printf(
+			/* translators: 1: author label. 2: author link. 3: post author. */
+			'<div><span class="font-semibold">%1$s %2$s:</span> <span class="author vcard"><a class="url fn n" href="%3$s">%4$s</a></span></div>',
+			tachyon_get_icon_svg( 'fa-feather', true ), // phpcs:ignore WordPress.Security.EscapeOutput
+			esc_html__( 'Author', 'tachyon' ),
+			esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ),
+			esc_html( get_the_author() )
+		)
+		: printf(
 		/* translators: 1: posted by label, only visible to screen readers. 2: author link. 3: post author. */
 			'<div><span class="sr-only">%1$s</span><span class="author vcard"><a class="url fn n" href="%2$s">%3$s</a></span></div>',
 			esc_html__( 'Posted by', 'tachyon' ),
@@ -115,6 +137,51 @@ if ( ! function_exists( 'tachyon_entry_meta' ) ) :
 	}
 endif;
 
+if ( ! function_exists( 'tachyon_entry_footer' ) ) :
+	/**
+	 * Prints HTML with meta information for the categories, tags and comments.
+	 */
+	function tachyon_entry_footer() {
+
+		// Hide author, post date, category and tag text for pages.
+		if ( 'post' === get_post_type() ) {
+
+			/* translators: used between list items, there is a space after the comma. */
+			$categories_list = get_the_category_list();
+
+			/* translators: used between list items, there is a space after the comma. */
+			$tags_list = get_the_tag_list();
+
+			if ( $categories_list || $tags_list ) {
+				printf(
+				/* translators: 1: posted in label, only visible to screen readers. 2: list of categories. */
+					'<div class="mb-2 italic text-neutral-800/75 dark:text-neutral-400/75">%1$s</div>',
+					esc_html__( 'Explore more on', 'tachyon' )
+				);
+			}
+
+			if ( $categories_list ) {
+				printf(
+				/* translators: 1: posted in label, only visible to screen readers. 2: list of categories. */
+					'<div><span class="sr-only">%1$s</span>%2$s</div>',
+					esc_html__( 'Posted in', 'tachyon' ),
+					$categories_list // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+				);
+			}
+			if ( $tags_list ) {
+				printf(
+				/* translators: 1: tags label, only visible to screen readers. 2: list of tags. */
+					'<div class="post-tags mt-2"><span class="sr-only">%1$s</span>%2$s</div>',
+					esc_html__( 'Tags:', 'tachyon' ),
+					$tags_list // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+				);
+			}
+		}
+
+		// Comment count.
+	}
+endif;
+
 if ( ! function_exists( 'tachyon_post_thumbnail' ) ) :
 	/**
 	 * Displays an optional post thumbnail, wrapping the post thumbnail in an
@@ -128,15 +195,15 @@ if ( ! function_exists( 'tachyon_post_thumbnail' ) ) :
 		if ( is_singular() ) :
 			?>
 
-			<figure>
-				<?php the_post_thumbnail(); ?>
+			<figure class="flex flex-shrink-0 items-center justify-center square-thumbnail" style="background-image: url(<?php the_post_thumbnail_url( 'tachyon-list-thumbnail' ); ?>);">
+				<?php the_post_thumbnail( 'tachyon-post-thumbnail' ); ?>
 			</figure><!-- .post-thumbnail -->
 
 			<?php
 		else :
 			?>
 
-			<figure class="flex flex-shrink-0 items-center justify-center list-thumbnail" style="background-image: url(<?php the_post_thumbnail_url( 'tachyon-list-thumbnail' ); ?>);">
+			<figure class="flex flex-shrink-0 items-center justify-center square-thumbnail" style="background-image: url(<?php the_post_thumbnail_url( 'tachyon-list-thumbnail' ); ?>);">
 				<a href="<?php the_permalink(); ?>" aria-hidden="true" tabindex="-1">
 					<?php the_post_thumbnail( 'tachyon-list-thumbnail' ); ?>
 				</a>

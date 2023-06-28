@@ -11,17 +11,19 @@
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
-	<header class="entry-header">
-		<?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
+	<div class="mx-auto mb-4 max-w-content lg:grid lg:grid-cols-2 lg:bg-slate-200 lg:dark:bg-slate-700">
+		<header class="entry-header lg:my-auto lg:p-6 lt-lg:mb-6">
+			<?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
 
-		<?php if ( ! is_page() ) : ?>
-			<div class="entry-meta">
-				<?php tachyon_entry_meta(); ?>
-			</div><!-- .entry-meta -->
-		<?php endif; ?>
-	</header><!-- .entry-header -->
+			<?php if ( ! is_page() ) : ?>
+				<div class="entry-meta">
+					<?php tachyon_entry_meta(); ?>
+				</div><!-- .entry-meta -->
+			<?php endif; ?>
+		</header><!-- .entry-header -->
 
-	<?php tachyon_post_thumbnail(); ?>
+		<?php tachyon_post_thumbnail(); ?>
+	</div>
 
 	<div <?php tachyon_content_class( 'entry-content' ); ?>>
 		<?php
@@ -49,8 +51,8 @@
 		?>
 	</div><!-- .entry-content -->
 
-	<footer class="entry-footer">
-		<?php tachyon_entry_meta(); ?>
+	<footer class="entry-footer mx-auto my-4 max-w-content">
+		<?php tachyon_entry_footer(); ?>
 	</footer><!-- .entry-footer -->
 
 </article><!-- #post-${ID} -->

@@ -211,11 +211,17 @@ function tachyon_html5_comment( $comment, $args, $depth ) {
  * @since Twenty Twenty-One 1.0
  *
  * @param string $icon  The icon.
+ * @param bool   $inline  Whether the icon is inline or not.
  * @return string
  */
-function tachyon_get_icon_svg( $icon ) {
-	$svg = sprintf( '<svg class="%s" width="1em" height="1em" fill="currentColor">', $icon )
-				. sprintf( '<use xlink:href="#%s"></use>', $icon )
-			. '</svg>';
+function tachyon_get_icon_svg( $icon, $inline = false ) {
+	$svg = sprintf(
+		'<svg class="%s" width="1em" height="1em" fill="currentColor">',
+		$icon . (
+		$inline ? ' inline-block align-[-0.125em]' : ''
+		)
+	)
+		. sprintf( '<use xlink:href="#%s"></use>', $icon )
+	. '</svg>';
 	return $svg;
 }

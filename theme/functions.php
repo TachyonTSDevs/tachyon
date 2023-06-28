@@ -149,7 +149,8 @@ if ( ! function_exists( 'tachyon_add_image_sizes' ) ) {
 	 * Custom Image Sizes
 	 */
 	function tachyon_add_image_sizes() {
-		add_image_size( 'tachyon-list-thumbnail', 300, 300, true );
+		add_image_size( 'tachyon-list-thumbnail', 300, 300, false );
+		add_image_size( 'tachyon-post-thumbnail', 480, 480, false );
 	}
 }
 
