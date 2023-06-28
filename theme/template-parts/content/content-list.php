@@ -45,6 +45,7 @@
 					<a href="<?php echo esc_url( get_permalink() ); ?>" class="flex items-center gap-3">
 						<?php esc_html_e( 'Read more', 'tachyon' ); ?>
 						<?php echo tachyon_get_icon_svg( 'fa-arrow-right' ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
+						<span class="sr-only"><?php the_title(); ?></span>
 					</a>
 				</div>
 
