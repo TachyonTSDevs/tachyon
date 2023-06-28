@@ -203,7 +203,7 @@ if ( ! function_exists( 'tachyon_post_thumbnail' ) ) :
 		else :
 			?>
 
-			<figure class="flex flex-shrink-0 items-center justify-center square-thumbnail" style="background-image: url(<?php the_post_thumbnail_url( 'tachyon-list-thumbnail' ); ?>);">
+			<figure class="flex flex-shrink-0 items-center justify-center square-thumbnail lg:min-w-[300px]" style="background-image: url(<?php the_post_thumbnail_url( 'tachyon-list-thumbnail' ); ?>);">
 				<a href="<?php the_permalink(); ?>" aria-hidden="true" tabindex="-1">
 					<?php the_post_thumbnail( 'tachyon-list-thumbnail' ); ?>
 				</a>
