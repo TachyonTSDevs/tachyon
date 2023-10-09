@@ -135,7 +135,7 @@ function tachyon_html5_comment( $comment, $args, $depth ) {
 	<<?php echo esc_attr( $tag ); ?> id="comment-<?php comment_ID(); ?>" <?php comment_class( $comment->has_children ? 'parent' : '', $comment ); ?>>
 		<article id="div-comment-<?php comment_ID(); ?>" class="comment-body">
 			<footer class="comment-meta">
-				<div class="comment-author vcard">
+				<div class="comment-author vcard flex">
 					<?php
 					if ( 0 !== $args['avatar_size'] ) {
 						echo get_avatar( $comment, $args['avatar_size'] );
@@ -159,7 +159,7 @@ function tachyon_html5_comment( $comment, $args, $depth ) {
 				<div class="comment-metadata">
 					<?php
 					printf(
-						'<a href="%s"><time datetime="%s">%s</time></a>',
+						'<a href="%s" class="text-xs"><time datetime="%s">%s</time></a>',
 						esc_url( get_comment_link( $comment, $args ) ),
 						esc_attr( get_comment_time( 'c' ) ),
 						esc_html(

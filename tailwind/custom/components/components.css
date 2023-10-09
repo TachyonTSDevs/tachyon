@@ -240,3 +240,12 @@
 		@apply text-right;
 	}
 }
+
+
+/**
+ * Comments
+ */
+#comments ol .children {
+	padding: 10px 20px;
+	border-left: 3px solid #333;
+}

@@ -50,7 +50,7 @@ if ( post_password_required() ) {
 
 		<?php the_comments_navigation(); ?>
 
-		<ol>
+		<ol class="py-5">
 			<?php
 			wp_list_comments(
 				array(
